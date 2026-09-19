@@ -1,0 +1,18 @@
+import re
+def extract_contacts(text):
+    # Patterns for search
+    email_pattern = r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+    phone_pattern = r'\+?[0-9][0-9()\-\.\s]{7,15}[0-9]'
+    # Extract matches
+    emails = re.findall(email_pattern, text)
+    phones = [phone.strip() for phone in re.findall(phone_pattern, text)]
+    return {
+        "emails": emails,
+        "phones": phones
+    }
+if __name__ == "__main__":
+    raw_text = "Contact us via admin@test.com or call +48 (123) 456-789. Also use support@site.co.uk or 555-44-33."
+    result = extract_contacts(raw_text)
+    print(f"Found emails: {result['emails']}")
+    print(f"Found phones: {result['phones']}")
+#ALL THIS SCRIT DOES IS LOOKING FOR PHONES AND EMAILS IN TEXT
